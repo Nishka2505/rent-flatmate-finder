@@ -81,11 +81,11 @@ def express_interest(
         models.CompatibilityScore.listing_id == listing.id,
     ).first()
 
+   
     owner = db.query(models.User).filter(models.User.id == listing.owner_id).first()
-    if score and score.score > 80 and owner:
+    if score and score.score >= 80 and owner:
         send_interest_notification_email(owner.email, listing, tenant_profile, score.score)
-
-    return new_request
+    return new_request   
 
 
 @router.get("/interest/my-requests", response_model=List[schemas.InterestRequestOut])
