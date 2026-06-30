@@ -104,3 +104,13 @@ class MessageOut(BaseModel):
 
     class Config:
         from_attributes = True
+
+class CompatibilityScoreOut(BaseModel):
+    id: int
+    tenant_id: int
+    listing_id: int
+    score: float
+    explanation: str
+
+    class Config:
+        from_attributes = True
