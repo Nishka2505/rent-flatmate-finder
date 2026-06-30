@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head><title>WS Test</title></head>
+<body>
+  <input id="token" placeholder="paste JWT token" style="width:400px"><br>
+  <input id="requestId" placeholder="interest request id" value="1"><br>
+  <button type="button" onclick="connect()">Connect</button><br><br>
+  <input id="msg" placeholder="message"><button type="button" onclick="send()">Send</button>
+  <pre id="log"></pre>
+
+  <script>
+    let ws;
+    function connect() {
+      const token = document.getElementById('token').value;
+      const reqId = document.getElementById('requestId').value;
+      ws = new WebSocket(`ws://127.0.0.1:8000/ws/chat/${reqId}?token=${token}`);
+      ws.onmessage = (e) => {
+        document.getElementById('log').textContent += e.data + "\n";
+      };
+      ws.onclose = (e) => {
+        document.getElementById('log').textContent += `CLOSED: ${e.code}\n`;
+      };
+    }
+    function send() {
+      const msg = document.getElementById('msg').value;
+      ws.send(JSON.stringify({content: msg}));
+      document.getElementById('msg').value = '';
+    }
+  </script>
+</body>
+</html>
