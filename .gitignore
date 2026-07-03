@@ -1,11 +1,25 @@
+# --- Python / backend ---
 venv/
 __pycache__/
 *.pyc
 .env
+backend/.env
+*.db
+backend/test.db
+*.sqlite3
+
+# --- Node / frontend ---
 node_modules/
 dist/
 build/
+frontend/dist/
+frontend/node_modules/
+
+# --- Editors ---
 .vscode/
 .idea/
+
+# --- OS / misc ---
 *.log
 .DS_Store
+Thumbs.db
